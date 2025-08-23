@@ -10,7 +10,7 @@ goto BuildError
 
 :BuildProject
 cd %cd%\App
-%compiler% ..\%projname%.vcxproj /p:Configuration=Release /p:Platform=x64
+%compiler% ..\%projname%.vcxproj /p:Configuration=VSCBuild /p:Platform=x64
 if %ERRORLEVEL% equ 0 goto BuildSucceeded
 
 :BuildError
