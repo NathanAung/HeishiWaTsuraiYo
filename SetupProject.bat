@@ -1,5 +1,5 @@
 @echo off
-if exist %SIV3D_0_6_14% goto ExitProgram
+::if exist %SIV3D_0_6_14% goto ExitProgram
 if exist "%cd%/OpenSiv3D" goto ExitProgram
 
 :SetupProject
