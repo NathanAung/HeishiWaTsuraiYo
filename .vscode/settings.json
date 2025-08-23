@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "array": "cpp",
+        "span": "cpp",
+        "vector": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp"
+    }
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/src",
+        "${workspaceFolder}/OpenSiv3D_0.6.16/include"
+    ]
+}

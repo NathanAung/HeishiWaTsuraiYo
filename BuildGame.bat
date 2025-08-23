@@ -1,0 +1,25 @@
+@echo off
+
+::Add comunity version here
+if exist "%programfiles%\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe" set compiler="%programfiles%\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe"
+
+set projname=OpenSiv3D_0.6.141
+
+if exist "%projname%.vcxproj" goto BuildProject
+goto BuildError
+
+:BuildProject
+cd %cd%\App
+%compiler% ..\%projname%.vcxproj /p:Configuration=Release /p:Platform=x64
+if %ERRORLEVEL% equ 0 goto BuildSucceeded
+
+:BuildError
+echo Build failed!
+pause
+exit
+
+:BuildSucceeded
+echo Build succeeded. Launching game...
+cd "%cd%\Intermediate\%projname%\Release\"
+start %projname%.exe
+
