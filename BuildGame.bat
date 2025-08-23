@@ -6,6 +6,8 @@ if exist "%programfiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\
 
 
 set projname=OpenSiv3D_0.6.141
+set configuration=VSCBuild
+:: for VSCode use VSCBuild, for Visual Studio use Release
 
 if exist "%projname%.vcxproj" goto BuildProject
 goto BuildError
