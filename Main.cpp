@@ -6,7 +6,7 @@ void Main()
 	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
 
 	// 画像ファイルからテクスチャを作成する | Create a texture from an image file
-	const Texture texture{ U"example/windmill.png" };
+	const Texture texture{ U"Assets/king.png" };
 
 	// 絵文字からテクスチャを作成する | Create a texture from an emoji
 	const Texture emoji{ U"🦖"_emoji };
@@ -33,10 +33,16 @@ void Main()
 	// プレイヤーが右を向いているか | Whether player is facing right
 	bool isPlayerFacingRight = true;
 
+
+	Vec2 playerPos = Vec2(400, 300); // Starting position
+	Vec2 targetPos = playerPos;      // Destination
+	bool facing = false;
+
+
 	while (System::Update())
 	{
 		// テクスチャを描く | Draw the texture
-		texture.draw(20, 20);
+		texture.scaled(0.2).draw(20, 20);
 
 		// テキストを描く | Draw text
 		font(U"Hello, Siv3D!🎮").draw(64, Vec2{ 20, 340 }, ColorF{ 0.2, 0.4, 0.8 });
@@ -91,7 +97,38 @@ void Main()
 
 		// プレイヤーを描く | Draw the player
 		emoji.scaled(0.75).mirrored(isPlayerFacingRight).drawAt(playerPosX, 540);
+
+
+		
+		if (MouseR.down())
+		{
+			targetPos = Cursor::PosF();
+		}
+
+		Vec2 direction = (targetPos - playerPos).normalized();
+		double distance = (targetPos - playerPos).length();
+
+		if (distance > 1.0) // Avoid jitter
+		{
+			playerPos += direction * speed * Scene::DeltaTime();
+		}
+
+		// Avoid flip when player is supposed face left
+		if (targetPos.x != playerPos.x) 
+		{
+			facing = targetPos.x < playerPos.x;
+		}
+
+		//Circle{ playerPos, 20 }.draw(Palette::Skyblue);
+		texture.scaled(0.2).mirrored(facing).drawAt(playerPos);
+		
+		Circle{ targetPos, 5 }.draw(Palette::Red);
+
+
 	}
+
+
+
 }
 
 //
