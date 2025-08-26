@@ -6,7 +6,8 @@ void Main()
 	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
 
 	// 画像ファイルからテクスチャを作成する | Create a texture from an image file
-	const Texture texture{ U"Assets/king.png" };
+	const Texture kingTexture{ U"Assets/king.png" };
+	const Texture knightTexture{ U"Assets/knight.png"};
 
 	// 絵文字からテクスチャを作成する | Create a texture from an emoji
 	const Texture emoji{ U"🦖"_emoji };
@@ -42,7 +43,7 @@ void Main()
 	while (System::Update())
 	{
 		// テクスチャを描く | Draw the texture
-		texture.scaled(0.2).draw(20, 20);
+		kingTexture.scaled(0.2).draw(20, 20);
 
 		// テキストを描く | Draw text
 		font(U"Hello, Siv3D!🎮").draw(64, Vec2{ 20, 340 }, ColorF{ 0.2, 0.4, 0.8 });
@@ -111,16 +112,18 @@ void Main()
 		if (distance > 1.0) // Avoid jitter
 		{
 			playerPos += direction * speed * Scene::DeltaTime();
+		} else {
+			playerPos = targetPos;
 		}
 
 		// Avoid flip when player is supposed face left
-		if (targetPos.x != playerPos.x) 
+		if (targetPos.x - playerPos.x > 0.01 * speed || targetPos.x - playerPos.x < -0.01 * speed) 
 		{
 			facing = targetPos.x < playerPos.x;
 		}
 
 		//Circle{ playerPos, 20 }.draw(Palette::Skyblue);
-		texture.scaled(0.2).mirrored(facing).drawAt(playerPos);
+		knightTexture.scaled(0.2).mirrored(facing).drawAt(playerPos);
 		
 		Circle{ targetPos, 5 }.draw(Palette::Red);
 
