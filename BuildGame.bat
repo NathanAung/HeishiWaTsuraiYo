@@ -1,9 +1,14 @@
 @echo off
 
-::Add comunity version here
-if exist "%programfiles%\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe" set compiler="%programfiles%\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe"
-if exist "%programfiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set compiler="%programfiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-
+:: make configuration switch based on vs licence
+if exist "%programfiles%\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe" (
+	set compiler="%programfiles%\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe"
+	set configuration=Release
+)
+if exist "%programfiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" (
+	set compiler="%programfiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	set configuration=VSCBuild
+)
 
 set projname=OpenSiv3D_0.6.141
 
@@ -24,4 +29,5 @@ exit
 echo Build succeeded. Launching game...
 cd "%cd%\Intermediate\%projname%\Release\"
 start %projname%.exe
+exit
 
