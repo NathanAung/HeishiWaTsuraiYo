@@ -40,6 +40,10 @@
 # debug information files
 *.dwo
 
+# Visual Studio
+/.vs/
+*.sln
+
 # Project Specific
 /[Ii]ntermediate/
 /[Oo]penSiv3D_SDK_0.6.14/
