@@ -109,6 +109,8 @@ void Main()
 		Vec2 direction = (targetPos - playerPos).normalized();
 		double distance = (targetPos - playerPos).length();
 
+		Circle{ targetPos, 5 }.draw(Palette::Red);
+
 		if (distance > 1.0) // Avoid jitter
 		{
 			playerPos += direction * speed * Scene::DeltaTime();
@@ -125,7 +127,7 @@ void Main()
 		//Circle{ playerPos, 20 }.draw(Palette::Skyblue);
 		knightTexture.scaled(0.2).mirrored(facing).drawAt(playerPos);
 		
-		Circle{ targetPos, 5 }.draw(Palette::Red);
+		
 
 
 	}
