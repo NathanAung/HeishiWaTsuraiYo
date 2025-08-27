@@ -39,11 +39,12 @@ void Main()
 	Vec2 targetPos = playerPos;      // Destination
 	bool facing = false;
 
+	Vec2 kingPos = Vec2(150, 250); // King starting position
 
 	while (System::Update())
 	{
 		// テクスチャを描く | Draw the texture
-		kingTexture.scaled(0.2).draw(20, 20);
+		
 
 		// // テキストを描く | Draw text
 		// font(U"Hello, Siv3D!🎮").draw(64, Vec2{ 20, 340 }, ColorF{ 0.2, 0.4, 0.8 });
@@ -99,7 +100,10 @@ void Main()
 		// // プレイヤーを描く | Draw the player
 		// emoji.scaled(0.75).mirrored(isPlayerFacingRight).drawAt(playerPosX, 540);
 
-
+		
+		kingTexture.scaled(0.2).drawAt(kingPos);
+		
+		
 		
 		if (MouseR.down())
 		{
@@ -127,6 +131,9 @@ void Main()
 		//Circle{ playerPos, 20 }.draw(Palette::Skyblue);
 		knightTexture.scaled(0.2).mirrored(facing).drawAt(playerPos);
 		
+		if (kingPos.y > playerPos.y) {
+			kingTexture.scaled(0.2).drawAt(kingPos);
+		}
 		
 
 
