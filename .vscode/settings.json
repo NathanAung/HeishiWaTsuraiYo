@@ -6,14 +6,13 @@
         "xstring": "cpp",
         "xutility": "cpp"
     }
-    ,"C_Cpp.default.browse.path": [
-        "${workspaceFolder}",
+    ,"C_Cpp.default.includePath": [
         "${workspaceFolder}/OpenSiv3D_SDK_0.6.14/include",
         "${workspaceFolder}/OpenSiv3D_SDK_0.6.14/include/ThirdParty",
+        "${workspaceFolder}/src"
+    ],
+    "C_Cpp.default.forcedInclude": [
+        "${workspaceFolder}/OpenSiv3D_SDK_0.6.14/include/Siv3D.pch"
     ]
-    ,"C_Cpp.default.includePath": [
-        "${workspaceFolder}",
-        "${workspaceFolder}/OpenSiv3D_SDK_0.6.14/include/**",
-        "${workspaceFolder}/OpenSiv3D_SDK_0.6.14/include/ThirdParty",
-    ]
+    
 }
