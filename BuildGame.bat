@@ -22,7 +22,6 @@ if %ERRORLEVEL% equ 0 goto BuildSucceeded
 
 :BuildError
 echo Build failed!
-pause
 exit
 
 :BuildSucceeded
