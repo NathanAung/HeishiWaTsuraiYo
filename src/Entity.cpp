@@ -10,7 +10,7 @@ void Entity::update() {
 }
 
 void Entity::draw() {
-    texture.draw(position); // default draw top-left
+    texture.scaled(0.2).drawAt(position); // default draw top-left
 }
 
 double Entity::getY() const {

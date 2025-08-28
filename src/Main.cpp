@@ -16,28 +16,26 @@ void Main()
 	const Texture kingTexture{ U"Assets/king.png" };
 	const Texture knightTexture{ U"Assets/knight.png"};
 
-	Player knight(Vec2{400, 300}, knightTexture);
+	// Player knight(Vec2{400, 300}, knightTexture);
 
-	
+	// Entity king(Vec2{150,250}, kingTexture);
 
+	// Entity entities[2] = {knight, king};
+
+	std::vector<std::unique_ptr<Entity>> entities;
+	entities.push_back(std::make_unique<Player>(Vec2{400,300}, knightTexture));
+	entities.push_back(std::make_unique<Entity>(Vec2{150,250}, kingTexture));
 
 
 	Vec2 kingPos = Vec2(150, 250); 		// King starting position
+
+
 	while (System::Update())
 	{
+		std::sort(entities.begin(), entities.end(),
+    	[](const auto& a, const auto& b){ return a->getY() < b->getY(); });
 
-		kingTexture.scaled(0.2).drawAt(kingPos);
-		
-		knight.update();
-		knight.draw();
-
-		if (kingPos.y > knight.getY()) {
-			kingTexture.scaled(0.2).drawAt(kingPos);
-		}
-
-
+		for (auto& e : entities) { e->update(); e->draw(); }
 	}
-
-
 
 }
