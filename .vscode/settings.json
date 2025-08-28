@@ -1,10 +1,13 @@
 {
     "files.associations": {
+        "*.embeddedhtml": "html",
         "array": "cpp",
         "span": "cpp",
         "vector": "cpp",
         "xstring": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "fstream": "cpp",
+        "xlocmes": "cpp"
     }
     ,"C_Cpp.default.includePath": [
         "${workspaceFolder}/src"

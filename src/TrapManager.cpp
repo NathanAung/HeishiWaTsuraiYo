@@ -1,10 +1,17 @@
+// TrapManager.cpp
 #include "TrapManager.hpp"
 
 
+TrapManager::TrapManager() {
+    // Initialize textures inside the constructor
+    
+	Console << U"Called";
+}
+
+
 void TrapManager::SpawnTrap(){
-	if(!isSpawning) return;
-
-
+	trapArr.emplace_back();
+	Console << U"trap spawned";
 }
 
 
@@ -24,6 +31,8 @@ void TrapManager::Update(){
 			spawnTime = Random(spawnTimeMin, spawnTimeMax);
 		}
 	}
+
+	Draw();
 }
 
 void TrapManager::UpdateTraps(const double& deltaTime){
@@ -31,13 +40,23 @@ void TrapManager::UpdateTraps(const double& deltaTime){
 		for(int i = trapArr.size() - 1; i >= 0; --i){
 			Trap& trap = trapArr[i];
 
-			trap.currentPos.x -= trapMoveSpeed * deltaTime;
+			float speed = trapMoveSpeed * deltaTime;
+			trap.TrapUpdate(speed);
+			//Console << trap.currentPos.x;
+
+			if(trap.currentPos.x < -50.0){
+				trapArr.remove_at(i);
+				continue;	// skip to next iteration
+			}
 		}
 	}
 }
 
 
-void TrapManager::Draw() const{
-
+void TrapManager::Draw(){
+	for (Trap& trap : trapArr) {
+		
+		trap.TrapDraw(holeTexArr); // Pass the textures here
+	}
 }
 
