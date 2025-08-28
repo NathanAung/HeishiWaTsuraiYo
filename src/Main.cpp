@@ -1,4 +1,5 @@
 ﻿# include <Siv3D.hpp> // Siv3D v0.6.14
+#include "TrapManager.hpp"
 
 using App = SceneManager<String>;
 
@@ -10,6 +11,9 @@ class Title : public App::Scene {
 
 void Main()
 {
+	TrapManager trapManager;
+	const Font font{ FontMethod::MSDF, 48, Typeface::Bold };
+
 	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
 
 	double time;
@@ -54,8 +58,14 @@ void Main()
 			isPlayerFacingRight = true;
 		}
 
+		trapManager.Update();
+
 		// プレイヤーを描く | Draw the player
 		emoji.scaled(0.75).mirrored(isPlayerFacingRight).drawAt(playerPosX, playerPosY);
+
+		
+		//font(U"delta time: {}"_fmt(trapManager.deltaTime)).draw(32, Vec2{ 20, 70 }, ColorF{ 1 });
+ 
 	}
 }
 
