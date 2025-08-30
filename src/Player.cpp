@@ -20,7 +20,7 @@ void Player::update() {
     const double distance = delta.length();
     const Vec2 direction = (distance > 0.0) ? (delta / distance) : Vec2::Zero();
 
-    //Circle{ Vec2(targetPos.x, targetPos.y + 80), 5 }.draw(ColorF{ 0.4, 0.4, 0.4 });
+    Circle{ Vec2(targetPos.x, targetPos.y + 80), 5 }.draw(ColorF{ 0.4, 0.4, 0.4 });
 
 	targetPos.x -= 100 * Scene::DeltaTime();
 
@@ -35,7 +35,8 @@ void Player::update() {
         facingLeft = (targetPos.x < position.x);
     }
 
-    if (KeySpace.down()) {
+    if (KeySpace.down() && attackCoolDown >= 0.6) {
+		attackCoolDown = 0;
         atkAnimInterval = 0.06;
         isAttacking = true;
 		if (!facingLeft) {
@@ -47,7 +48,7 @@ void Player::update() {
     } else if (atkAnimInterval > 0) {
         atkAnimInterval -= Scene::DeltaTime();
 		isAttacking = true;
-				if (!facingLeft) {
+		if (!facingLeft) {
 			hitbox = Rect(position.x + 50, position.y - 50, 60, 150);
 		}
 		else if (facingLeft) {
@@ -57,9 +58,20 @@ void Player::update() {
         isAttacking = false;
     }
 
+	if (attackCoolDown < 0.6) {
+		attackCoolDown += Scene::DeltaTime();
+	}
+
+
+	// if (hitbox.intersects(otherHitbox) && isAttacking) {
+    // 	// Collision detected
+	// }
+}
+
+
 	
 
-}
+
 
 
 
@@ -71,5 +83,5 @@ void Player::draw() {
         texture.scaled(0.2).mirrored(facingLeft).drawAt(position);
     }
 
-	Circle{position, 10}.draw(ColorF{ 1, 0.4, 0.4 });
+	//Circle{position, 10}.draw(ColorF{ 1, 0.4, 0.4 });
 }

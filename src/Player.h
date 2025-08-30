@@ -14,6 +14,8 @@ private:
     const s3d::Texture knightAtkTexture{ U"Assets/knightAtk.png" };
     double speed = 280.0;
 
+	double attackCoolDown = 0.6;
+
     s3d::Vec2 targetPos;        // destination
     bool facingLeft = false;
     bool isAttacking = false;

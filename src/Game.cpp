@@ -20,6 +20,7 @@ Game::Game(const InitData& init)
 	entities.push_back(std::make_unique<Entity>(Vec2{100,200}, grassTexture));
 	entities.push_back(std::make_unique<Entity>(Vec2{700,100}, grassTexture));
 	entities.push_back(std::make_unique<Entity>(Vec2{1000,400}, enemyTexture));
+	entities.push_back(std::make_unique<Entity>(Vec2{2000, 300}, enemyTexture));
 
 
 	Vec2 kingPos = Vec2(150, 250); 		// King starting position
@@ -59,7 +60,7 @@ void Game::draw() const
 
 	const Vec2 pos{ (Scene::Size().x/2 + Periodic::Sine1_1(3s, t) * Scene::Size().y/2), Scene::Size().y/2 };
 
-	m_emoji.drawAt(pos);
+	//m_emoji.drawAt(pos);
 
 
 
