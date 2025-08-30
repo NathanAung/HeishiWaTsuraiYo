@@ -7,7 +7,7 @@ Game::Game(const InitData& init)
 	, m_emoji{ U"🐥"_emoji }
 {
 	Print << U"Game::Game()";
-			Window::Resize(1280, 720);
+	Window::Resize(1280, 720);
 	// 背景の色を設定する | Set the background color
 	Scene::SetBackground(ColorF{ 0.7, 0.7, 0.7 });
 
@@ -53,7 +53,7 @@ void Game::update()
 
 void Game::draw() const
 {
-	Scene::SetBackground(ColorF(0.0, 0.6, 0.4));
+	//Scene::SetBackground(ColorF(0.0, 0.6, 0.4));
 
 	const double t = m_stopwatch.sF();
 

@@ -20,7 +20,7 @@ void Player::update() {
     const double distance = delta.length();
     const Vec2 direction = (distance > 0.0) ? (delta / distance) : Vec2::Zero();
 
-    Circle{ Vec2(targetPos.x, targetPos.y + 80), 5 }.draw(ColorF{ 0.4, 0.4, 0.4 });
+    //Circle{ Vec2(targetPos.x, targetPos.y + 80), 5 }.draw(ColorF{ 0.4, 0.4, 0.4 });
 
 	targetPos.x -= 100 * Scene::DeltaTime();
 
