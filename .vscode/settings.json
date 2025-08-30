@@ -4,7 +4,8 @@
         "span": "cpp",
         "vector": "cpp",
         "xstring": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "chrono": "cpp"
     }
     ,"C_Cpp.default.includePath": [
         "${workspaceFolder}/OpenSiv3D_SDK_0.6.14/include",

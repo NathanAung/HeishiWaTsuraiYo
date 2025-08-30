@@ -3,15 +3,16 @@
 
 Game::Game(const InitData& init)
 	: IScene{ init }
-	, m_emoji{ U"🐥"_emoji }
 {
 	Print << U"Game::Game()";
+	m_emoji = Texture{U"Assets/chick.png"};
 }
 
 Game::~Game()
 {
 	Print << U"Game::~Game()";
 }
+
 
 void Game::update()
 {
@@ -54,4 +55,8 @@ void Game::drawFadeOut(double t) const
 
 	Circle{ Scene::Size().x/2, Scene::Size().y/2, Scene::Size().x }
 	.drawFrame((t * Scene::Size().x), 0, ColorF{ 0.2, 0.3, 0.4 });
+}
+
+void Game::InitTexture() {
+	
 }

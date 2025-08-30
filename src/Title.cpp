@@ -1,24 +1,37 @@
 # include "Title.h"
 
+
+
 Title::Title(const InitData& init)
 		: IScene{ init }
 {
-	Print << U"Title::Title()";
+	playButton = new Button(Rect{ Scene::Width()/2 -150, Scene::Height()/4, 300, 100 }, FontAsset(U"TitleFont"), U"PLAY");
+	quitButton = new Button(Rect{ Scene::Width()/2 -150, Scene::Height()/2, 300, 100 }, FontAsset(U"TitleFont"), U"QUIT");
 }
 
 Title::~Title()
 {
-	Print << U"Title::~Title()";
+	playButton = nullptr;
+	quitButton = nullptr;
 }
 
 // Update function
 void Title::update()
 {
 	// On left click
-	if (MouseL.down())
+	playButton->update();
+	quitButton->update();
+
+	if (playButton->clicked())
 	{
 		// Transition to game scene
 		changeScene(U"Game", 1.5s);
+	}
+
+	if (quitButton->clicked())
+	{
+		// Transition to game scene
+		System::Exit();
 	}
 }
 
@@ -26,8 +39,15 @@ void Title::update()
 void Title::draw() const 
 {
 	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
-	FontAsset(U"TitleFont")(U"My Game").drawAt(60, Vec2{ Scene::Size().x/2, Scene::Size().y/8 });
-	Circle{ Cursor::Pos(), 50 }.draw(Palette::Seagreen);
+
+	// Add japanese text
+	FontAsset(U"TitleFont")(String(U"TEST")).drawAt(60, Vec2{ Scene::Size().x/2, Scene::Size().y/8 });
+
+
+
+	playButton->draw();
+	quitButton->draw();
+	
 }
 
 void Title::drawFadeIn(double t) const

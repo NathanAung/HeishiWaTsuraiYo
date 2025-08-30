@@ -4,12 +4,16 @@
 
 using App = SceneManager<String>;
 
+
 void Main()
 {
 	Window::SetTitle(U"兵士はつらいよ");
 	Window::Resize(1280, 720);
 
+	Graphics::SetVSyncEnabled(true);
+
 	FontAsset::Register(U"TitleFont", FontMethod::MSDF, 48, Typeface::Bold);
+
 
 	// Create scene manager
 	App manager;

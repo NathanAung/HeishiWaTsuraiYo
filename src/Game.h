@@ -17,6 +17,8 @@ public:
 
 	void drawFadeOut(double t) const override;
 
+	void InitTexture();
+
 private:
 
 	Texture m_emoji;
