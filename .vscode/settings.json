@@ -4,7 +4,8 @@
         "span": "cpp",
         "vector": "cpp",
         "xstring": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "memory": "cpp"
     }
     ,"C_Cpp.default.includePath": [
         "${workspaceFolder}/src"

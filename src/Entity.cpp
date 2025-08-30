@@ -7,6 +7,7 @@ Entity::Entity(const Vec2& pos, const Texture& tex)
 Entity::~Entity() = default;
 
 void Entity::update() {
+	position.x -= 100 * Scene::DeltaTime();
 }
 
 void Entity::draw() {

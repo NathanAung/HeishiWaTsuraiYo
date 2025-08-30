@@ -7,6 +7,8 @@ public:
 
     void update() override;
     void draw() override;
+	
+
 
 private:
     const s3d::Texture knightAtkTexture{ U"Assets/knightAtk.png" };
@@ -16,4 +18,9 @@ private:
     bool facingLeft = false;
     bool isAttacking = false;
     double atkAnimInterval = 0;
+	Rect hitbox;
+
+	
+
+
 };
