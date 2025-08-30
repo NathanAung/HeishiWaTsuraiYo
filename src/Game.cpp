@@ -1,11 +1,29 @@
 # include "Game.h"
 
 
+
 Game::Game(const InitData& init)
 	: IScene{ init }
 	, m_emoji{ U"🐥"_emoji }
 {
 	Print << U"Game::Game()";
+			Window::Resize(1280, 720);
+	// 背景の色を設定する | Set the background color
+	Scene::SetBackground(ColorF{ 0.7, 0.7, 0.7 });
+
+	// 画像ファイルからテクスチャを作成する | Create a texture from an image file
+
+
+	entities.push_back(std::make_unique<Player>(Vec2{400,300}, knightTexture));
+	entities.push_back(std::make_unique<King>(Vec2{200,350}, kingTexture));
+	entities.push_back(std::make_unique<Entity>(Vec2{500,500}, grassTexture));
+	entities.push_back(std::make_unique<Entity>(Vec2{100,200}, grassTexture));
+	entities.push_back(std::make_unique<Entity>(Vec2{700,100}, grassTexture));
+	entities.push_back(std::make_unique<Entity>(Vec2{1000,400}, enemyTexture));
+
+
+	Vec2 kingPos = Vec2(150, 250); 		// King starting position
+	
 }
 
 Game::~Game()
@@ -28,6 +46,9 @@ void Game::update()
 		// Transition to title scene
 		changeScene(U"Title", 1.5s);
 	}
+
+	std::sort(entities.begin(), entities.end(),
+	[](const auto& a, const auto& b){ return a->getY() < b->getY(); });
 }
 
 void Game::draw() const
@@ -39,6 +60,14 @@ void Game::draw() const
 	const Vec2 pos{ (Scene::Size().x/2 + Periodic::Sine1_1(3s, t) * Scene::Size().y/2), Scene::Size().y/2 };
 
 	m_emoji.drawAt(pos);
+
+
+
+
+	for (auto& e : entities) { e->update(); e->draw(); }
+
+
+
 }
 
 void Game::drawFadeIn(double t) const
