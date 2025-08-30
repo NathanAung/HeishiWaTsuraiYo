@@ -1,6 +1,8 @@
 ﻿//Main.cpp
 # include <Siv3D.hpp> // Siv3D v0.6.14
 #include "TrapManager.hpp"
+#include "KingP.hpp"
+#include "EnemyManagerP.hpp"
 
 using App = SceneManager<String>;
 
@@ -14,11 +16,9 @@ void Main()
 {
 	const Font font{ FontMethod::MSDF, 48, Typeface::Bold };
 	TrapManager trapManager;
-	trapManager.holeTexArr = {
-		Texture{ U"🕳️"_emoji },
-        Texture{ U"🫅"_emoji },
-        Texture{ U"🥷"_emoji }
-	};
+
+	KingP king;
+	EnemyManagerP enemyManagerP;
 
 	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
 
@@ -64,11 +64,18 @@ void Main()
 			isPlayerFacingRight = true;
 		}
 
-		trapManager.Update();
+		if(KeySpace.down()){
+			trapManager.TrapsPause(false);
+		}
+
+		trapManager.Update(king, enemyManagerP.enemyArr);
 
 		// プレイヤーを描く | Draw the player
 		emoji.scaled(0.75).mirrored(isPlayerFacingRight).drawAt(playerPosX, playerPosY);
 		//font(U"delta time: {}"_fmt(trapManager.deltaTime)).draw(32, Vec2{ 20, 70 }, ColorF{ 1 });
+
+		king.Draw();
+		enemyManagerP.Draw();
  
 	}
 }

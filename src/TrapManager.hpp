@@ -1,6 +1,8 @@
 // TrapManager.hpp
 #pragma once
 #include <Siv3D.hpp>
+#include "KingP.hpp"
+#include "EnemyManagerP.hpp"
 
 class TrapManager {
 private:
@@ -9,7 +11,7 @@ private:
 		Vec2 spawnPos{ 850, 300 };
 		Vec2 currentPos{ 900, 0 };
 		Circle collider{ 900, 0, 40 };
-		float trapScale = 0.5f;
+		float trapScale = 0.1f;
 
 		int state = 0;	//0 - normal, 1 - king fell in, 2 - enemy fell in
 		bool activated = false;
@@ -39,8 +41,8 @@ private:
 	float spawnTime = 2.0f;
 	float spawnTimer = 0.0f;
 
-	void SpawnTrap();
-	void UpdateTraps(const double& deltaTime);
+	void SpawnTrap();	// add a trap to array
+	void UpdateTraps(const double& deltaTime, KingP& king, Array<EnemyManagerP::EnemyP>& enemyArr);	// update individual traps
 
 public:
 	Array<Texture> holeTexArr;
@@ -50,7 +52,8 @@ public:
 
 	float trapMoveSpeed = 30.0f;
 
-	TrapManager();
-	void Update();
+	TrapManager();	// constructor
+	void Update(KingP& king, Array<EnemyManagerP::EnemyP>& enemyArr);	// update for the manager, spawn, update traps
 	void Draw();
+	void TrapsPause(bool pause); // true = pause spawning traps, false = resume
 };
