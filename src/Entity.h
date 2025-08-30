@@ -1,0 +1,17 @@
+#pragma once
+#include <Siv3D.hpp>
+
+class Entity {
+protected:
+    s3d::Vec2 position;
+    s3d::Texture texture;
+
+public:
+    Entity(const s3d::Vec2& pos, const s3d::Texture& tex);
+    virtual ~Entity();
+
+    virtual void update();   // can be overridden by Player
+    virtual void draw();     // can be overridden by Player
+
+    double getY() const;
+};
