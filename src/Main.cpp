@@ -1,31 +1,31 @@
-﻿// # include <Siv3D.hpp>
-// # include "Title.h"
-// # include "Game.h"
+﻿# include <Siv3D.hpp>
+# include "Title.h"
+# include "Game.h"
 
-// using App = SceneManager<String>;
+using App = SceneManager<String>;
 
-// void Main()
-// {
-// 	Window::SetTitle(U"兵士はつらいよ");
-// 	Window::Resize(1280, 720);
+void Main()
+{
+	Window::SetTitle(U"兵士はつらいよ");
+	Window::Resize(1280, 720);
 
-// 	FontAsset::Register(U"TitleFont", FontMethod::MSDF, 48, Typeface::Bold);
+	FontAsset::Register(U"TitleFont", FontMethod::MSDF, 48, Typeface::Bold);
 
-// 	// Create scene manager
-// 	App manager;
+	// Create scene manager
+	App manager;
 
-// 	manager.add<Title>(U"Title");
-// 	manager.add<Game>(U"Game");
+	manager.add<Title>(U"Title");
+	manager.add<Game>(U"Game");
 
-// 	manager.setFadeColor(ColorF{ 0.8, 0.9, 1.0 });
+	manager.setFadeColor(ColorF{ 0.8, 0.9, 1.0 });
 
-// 	manager.init(U"Title", 0.75s);
+	manager.init(U"Title", 0.75s);
 
-// 	while (System::Update())
-// 	{
-// 		if (not manager.update())
-// 		{
-// 			break;
-// 		}
-// 	}
-// }
+	while (System::Update())
+	{
+		if (not manager.update())
+		{
+			break;
+		}
+	}
+}

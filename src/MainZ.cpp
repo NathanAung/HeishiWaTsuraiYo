@@ -13,7 +13,7 @@ class Title : public App::Scene {
 };
 
 
-void Main()
+void MainZ()
 {
 	const Font font{ FontMethod::MSDF, 48, Typeface::Bold };
 	TrapManager trapManager;
