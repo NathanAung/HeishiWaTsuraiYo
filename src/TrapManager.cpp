@@ -3,17 +3,18 @@
 
 
 TrapManager::TrapManager() {
-    // Initialize speed inside the constructor
-    holeTexArr = {
+	// Initialize speed inside the constructor
+	holeTexArr = {
 		Texture{ U"Assets/HoleP.png"},
-        Texture{ U"Assets/HoleKP.png" },
-        Texture{ U"Assets/HoleEP.png" }
+		Texture{ U"Assets/HoleKP.png" },
+		Texture{ U"Assets/HoleEP.png" },
+		Texture{ U"Assets/HoleP.png"}
 	};
 	Console << U"Called";
 }
 
 
-void TrapManager::SpawnTrap(){
+void TrapManager::SpawnTrap() {
 	trapArr.emplace_back();
 	Console << U"trap spawned";
 }
@@ -21,16 +22,16 @@ void TrapManager::SpawnTrap(){
 
 // update for the manager, spawn, update traps
 // need arguments for player, king and soldiers
-void TrapManager::Update(KingP& king, Array<EnemyManagerP::EnemyP>& enemyArr){
+void TrapManager::Update(KingP& king, PlayerP& player, Array<EnemyManagerP::EnemyP>& enemyArr) {
 	const double deltaTime = Scene::DeltaTime();
 
-	UpdateTraps(deltaTime, king, enemyArr);
+	UpdateTraps(deltaTime, king, player, enemyArr);
 
-	if(isSpawning){
-		if(spawnTimer < spawnTime){
+	if (isSpawning) {
+		if (spawnTimer < spawnTime) {
 			spawnTimer += deltaTime;
 		}
-		else{
+		else {
 			SpawnTrap();
 			spawnTimer = 0;
 			spawnTime = Random(spawnTimeMin, spawnTimeMax);
@@ -41,25 +42,25 @@ void TrapManager::Update(KingP& king, Array<EnemyManagerP::EnemyP>& enemyArr){
 }
 
 
-void TrapManager::UpdateTraps(const double& deltaTime, KingP& king, Array<EnemyManagerP::EnemyP>& enemyArr){
-	if(isMoving){
-		for(int i = trapArr.size() - 1; i >= 0; --i){
-			Trap& trap = trapArr[i];
+void TrapManager::UpdateTraps(const double& deltaTime, KingP& king, PlayerP& player, Array<EnemyManagerP::EnemyP>& enemyArr) {
 
-			if(!trap.activated){
+	for (int i = trapArr.size() - 1; i >= 0; --i) {
+		Trap& trap = trapArr[i];
+		if (isMoving) {
+			if (!trap.activated) {
 				// king check
-				if(trap.collider.intersects(king.collider)){
+				if (trap.collider.intersects(king.collider)) {
 					king.fallen = true;	// boolean for the king falling
 					TrapsPause(true);	// pause trap
 					trap.state = 1;
 					trap.activated = true;
 				}
 				// enemy check
-				else if(!enemyArr.isEmpty()){
-					for(int j = enemyArr.size() - 1; j >= 0; --j){
+				else if (!enemyArr.isEmpty()) {
+					for (int j = enemyArr.size() - 1; j >= 0; --j) {
 						EnemyManagerP::EnemyP enemy = enemyArr[j];
 
-						if(trap.collider.intersects(enemy.collider)){
+						if (trap.collider.intersects(enemy.collider)) {
 							trap.state = 2;
 							trap.activated = true;
 							enemyArr.remove_at(j);
@@ -68,16 +69,23 @@ void TrapManager::UpdateTraps(const double& deltaTime, KingP& king, Array<EnemyM
 					}
 				}
 			}
-			
 
 			float speed = trapMoveSpeed * deltaTime;
 			trap.TrapUpdate(speed);
 			//Console << trap.currentPos.x;
 
-			if(trap.currentPos.x < -50.0){
+			if (trap.currentPos.x < -50.0) {
 				trapArr.remove_at(i);
 				Console << U"trap removed";
 				continue;	// skip to next iteration
+			}
+		}
+		else if (trap.state == 1) {
+			if (trap.collider.intersects(player.collider) && MouseL.down()) {
+				Console << U"collide";
+				king.fallen = false;
+				TrapsPause(false);	// unpause trap
+				trap.state = 3;	// completely disable trap
 			}
 		}
 	}
@@ -85,11 +93,11 @@ void TrapManager::UpdateTraps(const double& deltaTime, KingP& king, Array<EnemyM
 
 
 // true = pause spawning traps, false = resume
-void TrapManager::TrapsPause(bool pause){
+void TrapManager::TrapsPause(bool pause) {
 	isMoving = isSpawning = !pause;
 
-	for(int i = trapArr.size() - 1; i >= 0; --i){
-		if(trapArr[i].state == 1)
+	for (int i = trapArr.size() - 1; i >= 0; --i) {
+		if (trapArr[i].state == 1)
 			trapArr[i].state = 0;
 	}
 }
@@ -97,9 +105,9 @@ void TrapManager::TrapsPause(bool pause){
 
 
 
-void TrapManager::Draw(){
+void TrapManager::Draw() {
 	for (Trap& trap : trapArr) {
-		
+
 		trap.TrapDraw(holeTexArr); // Pass the textures here
 	}
 }
