@@ -3,6 +3,7 @@
 #include <Siv3D.hpp>
 #include "KingP.hpp"
 #include "EnemyManagerP.hpp"
+#include "PlayerP.hpp"
 
 class TrapManager {
 private:
@@ -13,7 +14,7 @@ private:
 		Circle collider{ 900, 0, 40 };
 		float trapScale = 0.1f;
 
-		int state = 0;	//0 - normal, 1 - king fell in, 2 - enemy fell in
+		int state = 0;	//0 - normal, 1 - king fell in, 2 - enemy fell in, 3 - disabled
 		bool activated = false;
 
 		Trap() {
@@ -42,7 +43,7 @@ private:
 	float spawnTimer = 0.0f;
 
 	void SpawnTrap();	// add a trap to array
-	void UpdateTraps(const double& deltaTime, KingP& king, Array<EnemyManagerP::EnemyP>& enemyArr);	// update individual traps
+	void UpdateTraps(const double& deltaTime, KingP& king, PlayerP& player, Array<EnemyManagerP::EnemyP>& enemyArr);	// update individual traps
 
 public:
 	Array<Texture> holeTexArr;
@@ -53,7 +54,7 @@ public:
 	float trapMoveSpeed = 30.0f;
 
 	TrapManager();	// constructor
-	void Update(KingP& king, Array<EnemyManagerP::EnemyP>& enemyArr);	// update for the manager, spawn, update traps
+	void Update(KingP& king, PlayerP& player, Array<EnemyManagerP::EnemyP>& enemyArr);	// update for the manager, spawn, update traps
 	void Draw();
 	void TrapsPause(bool pause); // true = pause spawning traps, false = resume
 };

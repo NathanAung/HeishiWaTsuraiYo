@@ -3,6 +3,7 @@
 #include "TrapManager.hpp"
 #include "KingP.hpp"
 #include "EnemyManagerP.hpp"
+#include "PlayerP.hpp"
 
 using App = SceneManager<String>;
 
@@ -12,13 +13,15 @@ class Title : public App::Scene {
 };
 
 
-void Main()
+void MainZ()
 {
 	const Font font{ FontMethod::MSDF, 48, Typeface::Bold };
 	TrapManager trapManager;
 
+	// PLACEHOLDER CLASSES
 	KingP king;
 	EnemyManagerP enemyManagerP;
+	PlayerP player;
 
 	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
 
@@ -68,7 +71,8 @@ void Main()
 			trapManager.TrapsPause(false);
 		}
 
-		trapManager.Update(king, enemyManagerP.enemyArr);
+		
+		trapManager.Update(king, player, enemyManagerP.enemyArr);
 
 		// プレイヤーを描く | Draw the player
 		emoji.scaled(0.75).mirrored(isPlayerFacingRight).drawAt(playerPosX, playerPosY);
@@ -76,7 +80,7 @@ void Main()
 
 		king.Draw();
 		enemyManagerP.Draw();
- 
+		player.Update();
 	}
 }
 
