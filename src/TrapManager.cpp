@@ -80,8 +80,9 @@ void TrapManager::UpdateTraps(const double& deltaTime, KingMoveManager& king, Pl
 				continue;	// skip to next iteration
 			}
 		}
+		// pull out king if fallen
 		else if (trap.state == 1) {
-			if (trap.collider.intersects(player.hitbox) && MouseL.down()) {
+			if (trap.collider.intersects(player.collider) && MouseL.down()) {
 				Console << U"collide";
 				king.fallen = false;
 				TrapsPause(false);	// unpause trap

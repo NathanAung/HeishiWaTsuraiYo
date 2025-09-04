@@ -22,7 +22,8 @@ void Player::update() {
 
     Circle{ Vec2(targetPos.x, targetPos.y + 80), 5 }.draw(ColorF{ 0.4, 0.4, 0.4 });
 
-	targetPos.x -= 100 * Scene::DeltaTime();
+	if(scrolling)
+		targetPos.x -= 100 * Scene::DeltaTime();
 
     if (distance > 1.0) {
         position += direction * speed * Scene::DeltaTime();
@@ -62,6 +63,8 @@ void Player::update() {
 		attackCoolDown += Scene::DeltaTime();
 	}
 
+	collider.setPos(position);
+
 
 	// if (hitbox.intersects(otherHitbox) && isAttacking) {
     // 	// Collision detected
@@ -82,6 +85,8 @@ void Player::draw() {
     } else {
         texture.scaled(0.2).mirrored(facingLeft).drawAt(position);
     }
+
+	//collider.draw();
 
 	//Circle{position, 10}.draw(ColorF{ 1, 0.4, 0.4 });
 }

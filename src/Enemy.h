@@ -8,8 +8,6 @@ public:
 
     void update() override;
     void draw() override;
-	
-	Rect collider;
 
 private:
     const s3d::Texture knightAtkTexture{ U"Assets/knightAtk.png" };

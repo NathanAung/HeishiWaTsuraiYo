@@ -42,19 +42,19 @@ void KingMoveManager::InvokeLoseEvent()
 }
 
 bool KingMoveManager::IsInsideTheHole() {
-	return _isInsideTheHole;
+	return fallen;
 }
 
 void KingMoveManager::FellIntoTheHole() {
-	_isInsideTheHole = true;
+	fallen = true;
 }
 
 void KingMoveManager::CameOutOfTheHole() {
-	_isInsideTheHole = false;
+	fallen = false;
 }
 
 void KingMoveManager::OnKingDamaged() {
-	if (_isInsideTheHole) return;
+	if (fallen) return;
 	if (_invisibleCount > 0) return;
 	_invisibleCount = _invisibleSec;
 	_kingHP -= _kingDamage;
@@ -65,10 +65,11 @@ void KingMoveManager::Update() {
 	//Print(_kingHP);
 	if (_invisibleCount > 0)
 		_invisibleCount -= Scene::DeltaTime();
-	if (!_isInsideTheHole && _timeFramePerSec > 0)
+	if (!fallen && _timeFramePerSec > 0)
 		_timeFramePerSec -= Scene::DeltaTime();
 	if (_invisibleCount > 0)
 		_invisibleCount -= Scene::DeltaTime();
+	collider.setPos(Vec2{_kingXPosition, Scene::Height() / 2});
 	if (_kingHP <= 0) {
 		InvokeLoseEvent();
 		_kingHP = 0;

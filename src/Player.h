@@ -3,6 +3,7 @@
 
 class Player : public Entity {
 public:
+	bool scrolling = true;
     Player(const s3d::Vec2& pos, const s3d::Texture& tex);
 	~Player() {};
 

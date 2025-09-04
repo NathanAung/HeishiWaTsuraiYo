@@ -53,10 +53,7 @@ void Game::update()
 		m_stopwatch.start();
 	}
 
-	if(KeySpace.down()){
-			trapManager.TrapsPause(false);
-		}
-
+	player->scrolling = !king->fallen;
 		
 	trapManager.Update(*king, *player, enemyArray);
 

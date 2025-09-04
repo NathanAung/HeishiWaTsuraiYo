@@ -9,7 +9,7 @@ class TrapManager {
 private:
 	struct Trap
 	{
-		Vec2 spawnPos{ 850, 300 };
+		Vec2 spawnPos{ 1300, 400 };
 		Vec2 currentPos{ 900, 0 };
 		Circle collider{ 900, 0, 40 };
 		float trapScale = 0.1f;

@@ -7,6 +7,7 @@ protected:
     s3d::Texture texture;
 
 public:
+	Circle collider{ 400, 300, 70 };
     Entity(const s3d::Vec2& pos, const s3d::Texture& tex);
     virtual ~Entity();
 

@@ -9,7 +9,7 @@ Enemy::Enemy(const Vec2& pos, const Texture& tex)
 
 void Enemy::update() {
 
-
+	collider.setPos(position);
 	// if (hitbox.intersects(otherHitbox) && isAttacking) {
     // 	// Collision detected
 	// }
