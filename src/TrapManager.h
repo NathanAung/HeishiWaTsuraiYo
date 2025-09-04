@@ -1,9 +1,9 @@
 // TrapManager.hpp
 #pragma once
 #include <Siv3D.hpp>
-#include "KingP.hpp"
-#include "EnemyManagerP.hpp"
-#include "PlayerP.hpp"
+#include "KingP.h"
+#include "EnemyManagerP.h"
+#include "PlayerP.h"
 
 class TrapManager {
 private:

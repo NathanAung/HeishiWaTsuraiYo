@@ -1,5 +1,5 @@
 // TrapManager.cpp
-#include "TrapManager.hpp"
+#include "TrapManager.h"
 
 
 TrapManager::TrapManager() {

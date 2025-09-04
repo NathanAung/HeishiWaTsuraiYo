@@ -1,6 +1,12 @@
 # include "Game.h"
 
+void Clear(){
+	Console << U"Win";
+}
 
+void Lose(){
+	Console << U"Lose";
+}
 
 Game::Game(const InitData& init)
 	: IScene{ init }
@@ -11,11 +17,13 @@ Game::Game(const InitData& init)
 	// 背景の色を設定する | Set the background color
 	Scene::SetBackground(ColorF{ 0.7, 0.7, 0.7 });
 
-	// 画像ファイルからテクスチャを作成する | Create a texture from an image file
+	king = new KingMoveManager(100, 30, 120, 100, 10);
+	king->AddWinEvent(Clear);
+	king->AddLoseEvent(Lose);
 
 
 	entities.push_back(std::make_unique<Player>(Vec2{400,300}, knightTexture));
-	entities.push_back(std::make_unique<King>(Vec2{200,350}, kingTexture));
+	//entities.push_back(std::make_unique<King>(Vec2{200,350}, kingTexture));
 	entities.push_back(std::make_unique<Entity>(Vec2{500,500}, grassTexture));
 	entities.push_back(std::make_unique<Entity>(Vec2{100,200}, grassTexture));
 	entities.push_back(std::make_unique<Entity>(Vec2{700,100}, grassTexture));
@@ -39,17 +47,12 @@ void Game::update()
 		m_stopwatch.start();
 	}
 
-	// On left click
-	if (MouseL.down())
-	{
-		m_stopwatch.pause();
-
-		// Transition to title scene
-		changeScene(U"Title", 1.5s);
-	}
+	
 
 	std::sort(entities.begin(), entities.end(),
 	[](const auto& a, const auto& b){ return a->getY() < b->getY(); });
+
+	king->Update();
 }
 
 void Game::draw() const
@@ -68,7 +71,7 @@ void Game::draw() const
 	for (auto& e : entities) { e->update(); e->draw(); }
 
 
-
+	king->Draw();
 }
 
 void Game::drawFadeIn(double t) const

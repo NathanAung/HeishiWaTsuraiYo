@@ -1,6 +1,7 @@
 # pragma once
 
 # include <Siv3D.hpp>
+# include "Button.h"
 
 class Title : public SceneManager<String>::Scene
 {
@@ -19,4 +20,9 @@ public:
 	void drawFadeIn(double t) const override;
 
 	void drawFadeOut(double t) const override;
+
+private:
+	Button* playButton;
+	Button* quitButton;
+
 };

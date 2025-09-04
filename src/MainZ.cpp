@@ -1,9 +1,6 @@
 ﻿//Main.cpp
 # include <Siv3D.hpp> // Siv3D v0.6.14
-#include "TrapManager.hpp"
-#include "KingP.hpp"
-#include "EnemyManagerP.hpp"
-#include "PlayerP.hpp"
+#include "TrapManager.h"
 
 using App = SceneManager<String>;
 

@@ -4,6 +4,7 @@
 # include "Entity.h"
 # include "King.h"
 # include "Player.h"
+# include "KingMoveManager.h"
 
 class Game : public SceneManager<String>::Scene
 {
@@ -30,4 +31,6 @@ private:
 	const Texture grassTexture{U"Assets/grass.png"};
 	const Texture enemyTexture{U"Assets/enemy.png"};
 	std::vector<std::unique_ptr<Entity>> entities;
+
+	KingMoveManager* king;
 };
