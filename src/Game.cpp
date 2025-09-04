@@ -21,14 +21,20 @@ Game::Game(const InitData& init)
 	king->AddWinEvent(Clear);
 	king->AddLoseEvent(Lose);
 
+	player = new Player(Vec2{400,300}, knightTexture);
+	
+	for (int i = 0; i < 10; i++){
+		enemyArray.push_back(new Enemy(Vec2{500,500}, enemyTexture));
+	}
 
-	entities.push_back(std::make_unique<Player>(Vec2{400,300}, knightTexture));
+	entities.push_back(std::unique_ptr<Player>(player));
 	//entities.push_back(std::make_unique<King>(Vec2{200,350}, kingTexture));
 	entities.push_back(std::make_unique<Entity>(Vec2{500,500}, grassTexture));
 	entities.push_back(std::make_unique<Entity>(Vec2{100,200}, grassTexture));
 	entities.push_back(std::make_unique<Entity>(Vec2{700,100}, grassTexture));
-	entities.push_back(std::make_unique<Entity>(Vec2{1000,400}, enemyTexture));
-	entities.push_back(std::make_unique<Entity>(Vec2{2000, 300}, enemyTexture));
+	for(int i = 0; i < enemyArray.size(); i++){
+		entities.push_back(std::unique_ptr<Enemy>(enemyArray[i]));
+	}
 
 
 	Vec2 kingPos = Vec2(150, 250); 		// King starting position
@@ -47,7 +53,12 @@ void Game::update()
 		m_stopwatch.start();
 	}
 
-	
+	if(KeySpace.down()){
+			trapManager.TrapsPause(false);
+		}
+
+		
+	trapManager.Update(*king, *player, enemyArray);
 
 	std::sort(entities.begin(), entities.end(),
 	[](const auto& a, const auto& b){ return a->getY() < b->getY(); });

@@ -22,7 +22,7 @@ void TrapManager::SpawnTrap() {
 
 // update for the manager, spawn, update traps
 // need arguments for player, king and soldiers
-void TrapManager::Update(KingP& king, PlayerP& player, Array<EnemyManagerP::EnemyP>& enemyArr) {
+void TrapManager::Update(KingMoveManager& king, Player& player, std::vector<Enemy*>& enemyArr) {
 	const double deltaTime = Scene::DeltaTime();
 
 	UpdateTraps(deltaTime, king, player, enemyArr);
@@ -42,7 +42,7 @@ void TrapManager::Update(KingP& king, PlayerP& player, Array<EnemyManagerP::Enem
 }
 
 
-void TrapManager::UpdateTraps(const double& deltaTime, KingP& king, PlayerP& player, Array<EnemyManagerP::EnemyP>& enemyArr) {
+void TrapManager::UpdateTraps(const double& deltaTime, KingMoveManager& king, Player& player,std::vector<Enemy*>& enemyArr) {
 
 	for (int i = trapArr.size() - 1; i >= 0; --i) {
 		Trap& trap = trapArr[i];
@@ -56,14 +56,14 @@ void TrapManager::UpdateTraps(const double& deltaTime, KingP& king, PlayerP& pla
 					trap.activated = true;
 				}
 				// enemy check
-				else if (!enemyArr.isEmpty()) {
+				else if (enemyArr.size() != 0) {
 					for (int j = enemyArr.size() - 1; j >= 0; --j) {
-						EnemyManagerP::EnemyP enemy = enemyArr[j];
+						Enemy enemy = *enemyArr[j];
 
 						if (trap.collider.intersects(enemy.collider)) {
 							trap.state = 2;
 							trap.activated = true;
-							enemyArr.remove_at(j);
+							enemyArr.erase(enemyArr.begin() + j);
 							continue;
 						}
 					}
@@ -81,7 +81,7 @@ void TrapManager::UpdateTraps(const double& deltaTime, KingP& king, PlayerP& pla
 			}
 		}
 		else if (trap.state == 1) {
-			if (trap.collider.intersects(player.collider) && MouseL.down()) {
+			if (trap.collider.intersects(player.hitbox) && MouseL.down()) {
 				Console << U"collide";
 				king.fallen = false;
 				TrapsPause(false);	// unpause trap

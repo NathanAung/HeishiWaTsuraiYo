@@ -1,9 +1,9 @@
 // TrapManager.hpp
 #pragma once
 #include <Siv3D.hpp>
-#include "KingP.h"
-#include "EnemyManagerP.h"
-#include "PlayerP.h"
+#include "KingMoveManager.h"
+#include "Enemy.h"
+#include "Player.h"
 
 class TrapManager {
 private:
@@ -43,7 +43,7 @@ private:
 	float spawnTimer = 0.0f;
 
 	void SpawnTrap();	// add a trap to array
-	void UpdateTraps(const double& deltaTime, KingP& king, PlayerP& player, Array<EnemyManagerP::EnemyP>& enemyArr);	// update individual traps
+	void UpdateTraps(const double& deltaTime, KingMoveManager& king, Player& player, std::vector<Enemy*>& enemyArr);	// update individual traps
 
 public:
 	Array<Texture> holeTexArr;
@@ -54,7 +54,7 @@ public:
 	float trapMoveSpeed = 30.0f;
 
 	TrapManager();	// constructor
-	void Update(KingP& king, PlayerP& player, Array<EnemyManagerP::EnemyP>& enemyArr);	// update for the manager, spawn, update traps
+	void Update(KingMoveManager& king, Player& player, std::vector<Enemy*>& enemyArr);	// update for the manager, spawn, update traps
 	void Draw();
 	void TrapsPause(bool pause); // true = pause spawning traps, false = resume
 };

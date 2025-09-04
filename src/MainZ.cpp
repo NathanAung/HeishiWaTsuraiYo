@@ -1,4 +1,5 @@
 ﻿//Main.cpp
+/*
 # include <Siv3D.hpp> // Siv3D v0.6.14
 #include "TrapManager.h"
 
@@ -16,7 +17,7 @@ void MainZ()
 	TrapManager trapManager;
 
 	// PLACEHOLDER CLASSES
-	KingP king;
+	KingMoveManager* king = new KingMoveManager(100, 30, 120, 100, 10);
 	EnemyManagerP enemyManagerP;
 	PlayerP player;
 
@@ -69,13 +70,13 @@ void MainZ()
 		}
 
 		
-		trapManager.Update(king, player, enemyManagerP.enemyArr);
+		trapManager.Update(*king, player, enemyManagerP.enemyArr);
 
 		// プレイヤーを描く | Draw the player
 		emoji.scaled(0.75).mirrored(isPlayerFacingRight).drawAt(playerPosX, playerPosY);
 		//font(U"delta time: {}"_fmt(trapManager.deltaTime)).draw(32, Vec2{ 20, 70 }, ColorF{ 1 });
 
-		king.Draw();
+		king->Draw();
 		enemyManagerP.Draw();
 		player.Update();
 	}
@@ -90,3 +91,6 @@ void MainZ()
 //
 // - Visual Studio を更新した直後は、プログラムのリビルド（[ビルド]メニュー → [ソリューションのリビルド]）が必要な場合があります。
 //
+
+
+*/

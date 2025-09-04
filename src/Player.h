@@ -4,11 +4,12 @@
 class Player : public Entity {
 public:
     Player(const s3d::Vec2& pos, const s3d::Texture& tex);
+	~Player() {};
 
     void update() override;
     void draw() override;
 	
-
+	Rect hitbox;
 
 private:
     const s3d::Texture knightAtkTexture{ U"Assets/knightAtk.png" };
@@ -20,7 +21,7 @@ private:
     bool facingLeft = false;
     bool isAttacking = false;
     double atkAnimInterval = 0;
-	Rect hitbox;
+	
 
 	
 

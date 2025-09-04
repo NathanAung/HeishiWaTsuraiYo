@@ -59,6 +59,8 @@ class KingMoveManager
 	public:
 		Circle collider{ 400, 300, 40 };
 
+		bool fallen = false;
+
 		KingMoveManager(double kingXPosition, double scrollSpeed, double gamePlayDuration, int32 kingHP, int32 kingDamage);
 		~KingMoveManager();
 		

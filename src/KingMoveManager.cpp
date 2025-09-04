@@ -79,7 +79,9 @@ void KingMoveManager::Update() {
 }
 
 void KingMoveManager::Draw() {
-	king.scaled(0.25).drawAt(_kingXPosition, Scene::Height() / 2);
+	if(!fallen)
+			king.scaled(0.25).drawAt(_kingXPosition, Scene::Height() / 2);
+	else false;
 	queen.scaled(0.75).drawAt((_timeFramePerSec * _scrollSpeedPerSec) + _kingXPosition + _kingPosOffset, Scene::Height() / 2);
 	_gaugeBackImage.draw();
 	_hpGaugebackImage.draw();
