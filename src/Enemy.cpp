@@ -13,9 +13,17 @@ void Enemy::update() {
 	if(movingTime > 0.0){
 
 		movingTime -= Scene::DeltaTime();
+		
 
-		position.x = Math::Lerp(position.x,movingToPos.x, Scene::DeltaTime());
-		position.y = Math::Lerp(position.y,movingToPos.y, Scene::DeltaTime());
+		position.x = Math::Lerp(position.x,movingToPos.x,Scene::DeltaTime());
+		position.y = Math::Lerp(position.y,movingToPos.y,Scene::DeltaTime());
+
+		movingToPos.x -= 75 * Scene::DeltaTime();
+
+		if (Math::Abs(movingToPos.x - position.x) < 5)
+			movingTime = 0.0;
+
+
 
 		collider.setPos(position);
 		return;
@@ -31,8 +39,8 @@ void Enemy::update() {
 
 
 void Enemy::draw() {
-    // if(!fallen)
-	texture.scaled(0.2).drawAt(position);
+    if(!fallen)
+		texture.scaled(0.2).drawAt(position);
 	
 }
 
@@ -43,5 +51,7 @@ void Enemy::MoveTo(Vec2 pos){
 
 void Enemy::PushTo(Vec2 pos, double time){
 	movingToPos = pos;
+	stepsX = time / movingToPos.x;
+	stepsY = time / movingToPos.y;
 	movingTime = time;
 }

@@ -27,6 +27,7 @@ Game::Game(const InitData& init)
 
 	entities.push_back(std::unique_ptr<Player>(player));
 	//entities.push_back(std::make_unique<King>(Vec2{200,350}, kingTexture));
+	// make random grass
 	entities.push_back(std::make_unique<Entity>(Vec2{ 500,500 }, grassTexture));
 	entities.push_back(std::make_unique<Entity>(Vec2{ 100,200 }, grassTexture));
 	entities.push_back(std::make_unique<Entity>(Vec2{ 700,100 }, grassTexture));
@@ -70,7 +71,7 @@ void Game::update()
 				if (nearestTrap != -1) {
 					enemyArray[i]->PushTo(trapManager.trapArr[nearestTrap].collider.center, 10.0);
 
-				}
+				}else enemyArray[i]->PushTo(Vec2{enemyArray[i]->collider.center.x + 200, enemyArray[i]->collider.center.y}, 10.0);
 
 
 			}
@@ -104,10 +105,10 @@ void Game::update()
 	king->Update();
 
 	if (king->ReturnGameStatus() & 0x0100)
-		changeScene(U"Title", 1.5s); //WON
+		changeScene(U"Win", 1.5s); //WON
 
 	if (king->ReturnGameStatus() & 0x0010)
-		changeScene(U"Title", 1.5s); //LOST
+		changeScene(U"Lose", 1.5s); //LOST
 }
 
 void Game::draw() const
