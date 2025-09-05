@@ -5,10 +5,10 @@
 TrapManager::TrapManager() {
 	// Initialize speed inside the constructor
 	holeTexArr = {
-		Texture{ U"Assets/HoleP.png"},
-		Texture{ U"Assets/HoleKP.png" },
-		Texture{ U"Assets/HoleEP.png" },
-		Texture{ U"Assets/HoleP.png"}
+		Texture{ U"Assets/hole.png"},
+		Texture{ U"Assets/holeKing.png" },
+		Texture{ U"Assets/HoleEnemy.png" },
+		Texture{ U"Assets/hole.png"}
 	};
 	Console << U"Called";
 }
@@ -27,7 +27,7 @@ void TrapManager::Update(KingMoveManager& king, Player& player, std::vector<Enem
 
 	UpdateTraps(deltaTime, king, player, enemyArr);
 
-	if (isSpawning) {
+	if (isSpawning && king._timeFramePerSec > spawnStopTime) {
 		if (spawnTimer < spawnTime) {
 			spawnTimer += deltaTime;
 		}

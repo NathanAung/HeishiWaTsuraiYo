@@ -63,6 +63,7 @@ void KingMoveManager::OnKingDamaged() {
 void KingMoveManager::Update() {
 	//Print(_invisibleCount);
 	//Print(_kingHP);
+	//Console << _timeFramePerSec;
 	if (_invisibleCount > 0)
 		_invisibleCount -= Scene::DeltaTime();
 	if (!fallen && _timeFramePerSec > 0)
@@ -83,7 +84,7 @@ void KingMoveManager::Draw() {
 	if(!fallen)
 			king.scaled(0.25).drawAt(_kingXPosition, Scene::Height() / 2);
 	else false;
-	queen.scaled(0.75).drawAt((_timeFramePerSec * _scrollSpeedPerSec) + _kingXPosition + _kingPosOffset, Scene::Height() / 2);
+	queen.scaled(0.25).drawAt((_timeFramePerSec * _scrollSpeedPerSec) + _kingXPosition + _kingPosOffset, Scene::Height() / 2);
 	_gaugeBackImage.draw();
 	_hpGaugebackImage.draw();
 	RectF{ _gaugeBackImage.x + 10, _gaugeBackImage.y + 10, (_gaugeBackImage.w - 20) * (_timeFramePerSec / _kingMoveTimeSec), _gaugeBackImage.h - 20 }.draw(Palette::Blue);

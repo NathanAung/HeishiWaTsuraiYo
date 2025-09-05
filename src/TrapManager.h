@@ -12,7 +12,7 @@ private:
 		Vec2 spawnPos{ 1300, 400 };
 		Vec2 currentPos{ 900, 0 };
 		Circle collider{ 900, 0, 40 };
-		float trapScale = 0.1f;
+		float trapScale = 0.2f;
 
 		int state = 0;	//0 - normal, 1 - king fell in, 2 - enemy fell in, 3 - disabled
 		bool activated = false;
@@ -34,6 +34,7 @@ private:
 
 		void TrapDraw(const Array<Texture>& textures) {
 			textures[state].scaled(trapScale).drawAt(currentPos);
+			//collider.draw();
 		}
 	};
 
@@ -41,6 +42,8 @@ private:
 	const float spawnTimeMax = 8.0f;
 	float spawnTime = 2.0f;
 	float spawnTimer = 0.0f;
+
+	float spawnStopTime = 35.0f;
 
 	void SpawnTrap();	// add a trap to array
 	void UpdateTraps(const double& deltaTime, KingMoveManager& king, Player& player, std::vector<Enemy*>& enemyArr);	// update individual traps

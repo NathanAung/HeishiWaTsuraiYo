@@ -4,15 +4,16 @@
 
 class KingMoveManager
 {
+	public:
+		// 現在の残り移動時間
+		double _timeFramePerSec;
+		
 	private:
 		// 王の移動速度
 		double _scrollSpeedPerSec;
 
 		// 王の総移動時間
 		double _kingMoveTimeSec;
-
-		// 現在の残り移動時間
-		double _timeFramePerSec;
 
 		// 王のX座標
 		double _kingXPosition;
@@ -34,7 +35,7 @@ class KingMoveManager
 
 		const Texture king{U"Assets/king.png"};
 
-		const Texture queen{ U"👩"_emoji };
+		const Texture queen{U"Assets/queen.png" };
 
 		const Rect _gaugeBackImage{ 200, 50, 800, 50 };
 
