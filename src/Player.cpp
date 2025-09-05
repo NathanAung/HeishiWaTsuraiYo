@@ -23,7 +23,8 @@ void Player::update() {
     Circle{ Vec2(targetPos.x, targetPos.y + 80), 5 }.draw(ColorF{ 0.4, 0.4, 0.4 });
 
 	if(scrolling)
-		targetPos.x -= 100 * Scene::DeltaTime();
+		targetPos.x = Max(50.0, targetPos.x - 100 * Scene::DeltaTime());
+		//targetPos.x -= 100 * Scene::DeltaTime();
 
     if (distance > 1.0) {
         position += direction * speed * Scene::DeltaTime();
