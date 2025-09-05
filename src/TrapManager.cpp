@@ -63,7 +63,7 @@ void TrapManager::UpdateTraps(const double& deltaTime, KingMoveManager& king, Pl
 						if (trap.collider.intersects(enemy.collider)) {
 							trap.state = 2;
 							trap.activated = true;
-							enemyArr.erase(enemyArr.begin() + j);
+							//enemyArr.erase(enemyArr.begin() + j);
 							continue;
 						}
 					}

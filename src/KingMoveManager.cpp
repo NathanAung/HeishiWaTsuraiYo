@@ -55,8 +55,8 @@ void KingMoveManager::CameOutOfTheHole() {
 
 void KingMoveManager::OnKingDamaged() {
 	if (fallen) return;
-	if (_invisibleCount > 0) return;
-	_invisibleCount = _invisibleSec;
+	//if (_invisibleCount > 0) return;
+	//_invisibleCount = _invisibleSec;
 	_kingHP -= _kingDamage;
 }
 
@@ -71,11 +71,11 @@ void KingMoveManager::Update() {
 		_invisibleCount -= Scene::DeltaTime();
 	collider.setPos(Vec2{_kingXPosition, Scene::Height() / 2});
 	if (_kingHP <= 0) {
-		InvokeLoseEvent();
+		//InvokeLoseEvent();
 		_kingHP = 0;
 	}
 	if (_timeFramePerSec <= 0) {
-		InvokeWinEvent();
+		//InvokeWinEvent();
 	}
 }
 
@@ -91,4 +91,16 @@ void KingMoveManager::Draw() {
 	if (_timeFramePerSec <= 0) {
 		FontAsset(U"TitleFont")(U"Clear").drawAt(100, 100);
 	}
+}
+
+char KingMoveManager::ReturnGameStatus() {
+	if (_timeFramePerSec <= 0) {
+		return 0x0100;
+	}
+
+	if (_kingHP <= 0) {
+		return 0x0010;
+	}
+
+	return 0x0000;
 }

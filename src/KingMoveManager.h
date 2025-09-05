@@ -83,4 +83,6 @@ class KingMoveManager
 		void Update();
 
 		void Draw();
+
+		char ReturnGameStatus();
 };

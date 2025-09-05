@@ -9,6 +9,8 @@ Enemy::Enemy(const Vec2& pos, const Texture& tex)
 
 void Enemy::update() {
 
+	position.x -= 100 * Scene::DeltaTime();
+	position.y += ( position.x < 300 ? (position.y > Scene::Height()/2 ? -100 : 100)  * Scene::DeltaTime() : 0);
 	collider.setPos(position);
 	// if (hitbox.intersects(otherHitbox) && isAttacking) {
     // 	// Collision detected
@@ -16,14 +18,12 @@ void Enemy::update() {
 }
 
 
-	
-
-
-
-
-
 void Enemy::draw() {
     
 	texture.scaled(0.2).drawAt(position);
 	
+}
+
+void Enemy::MoveTo(Vec2 pos){
+	position = pos;
 }

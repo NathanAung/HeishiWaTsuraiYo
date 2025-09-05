@@ -1,8 +1,6 @@
 # include "Game.h"
 
-void Clear(){
-	Console << U"Win";
-}
+
 
 void Lose(){
 	Console << U"Lose";
@@ -17,14 +15,14 @@ Game::Game(const InitData& init)
 	// 背景の色を設定する | Set the background color
 	Scene::SetBackground(ColorF{ 0.7, 0.7, 0.7 });
 
+	
+
 	king = new KingMoveManager(100, 30, 120, 100, 10);
-	king->AddWinEvent(Clear);
-	king->AddLoseEvent(Lose);
 
 	player = new Player(Vec2{400,300}, knightTexture);
 	
-	for (int i = 0; i < 10; i++){
-		enemyArray.push_back(new Enemy(Vec2{500,500}, enemyTexture));
+	for (int i = 0; i < 8; i++){
+		enemyArray.push_back(new Enemy(Vec2{ Scene::Width() + i * 200,Random(100, Scene::Height() - 100)}, enemyTexture));
 	}
 
 	entities.push_back(std::unique_ptr<Player>(player));
@@ -53,6 +51,20 @@ void Game::update()
 		m_stopwatch.start();
 	}
 
+	for(int i = 0; i < enemyArray.size(); i++){
+		
+		if (enemyArray[i]->collider.intersects(king->collider)){
+			king->OnKingDamaged();
+			enemyArray[i]->MoveTo(Vec2{Scene::Width() + 100,Random(100, Scene::Height() - 100)});
+		}
+
+
+		if(enemyArray[i]->collider.x < -100)
+			enemyArray[i]->MoveTo(Vec2{Scene::Width() + 100,Random(100, Scene::Height() - 100)});
+	}
+
+	
+
 	player->scrolling = !king->fallen;
 		
 	trapManager.Update(*king, *player, enemyArray);
@@ -61,6 +73,12 @@ void Game::update()
 	[](const auto& a, const auto& b){ return a->getY() < b->getY(); });
 
 	king->Update();
+
+	if(king->ReturnGameStatus() & 0x0100)
+		changeScene(U"Title", 1.5s); //WON
+	
+	if(king->ReturnGameStatus() & 0x0010)
+		changeScene(U"Title", 1.5s); //LOST
 }
 
 void Game::draw() const
@@ -96,3 +114,4 @@ void Game::drawFadeOut(double t) const
 	Circle{ Scene::Size().x/2, Scene::Size().y/2, Scene::Size().x }
 	.drawFrame((t * Scene::Size().x), 0, ColorF{ 0.2, 0.3, 0.4 });
 }
+
