@@ -9,8 +9,14 @@ public:
     void update() override;
     void draw() override;
 	void MoveTo(Vec2 pos);
+	void PushTo(Vec2 pos, double time);
 	bool fallen = false;
+	double movingTime = 0.0;
 
 private:
     const s3d::Texture knightAtkTexture{ U"Assets/knightAtk.png" };
+
+	
+	double maxTime = 10.0;
+	Vec2 movingToPos;
 };

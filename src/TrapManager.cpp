@@ -60,7 +60,7 @@ void TrapManager::UpdateTraps(const double& deltaTime, KingMoveManager& king, Pl
 					for (int j = enemyArr.size() - 1; j >= 0; --j) {
 						Enemy enemy = *enemyArr[j];
 
-						if (trap.collider.intersects(enemy.collider)) {
+						if (trap.collider.intersects(enemy.collider) && enemy.fallen) {
 							trap.state = 2;
 							trap.activated = true;
 							//enemyArr.erase(enemyArr.begin() + j);
