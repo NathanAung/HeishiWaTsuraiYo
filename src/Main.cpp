@@ -1,6 +1,8 @@
 ﻿# include <Siv3D.hpp>
 # include "Title.h"
 # include "Game.h"
+# include "Win.h"
+# include "Lose.h"
 
 using App = SceneManager<String>;
 
@@ -16,6 +18,8 @@ void Main()
 
 	manager.add<Title>(U"Title");
 	manager.add<Game>(U"Game");
+	manager.add<Win>(U"Win");
+	manager.add<Lose>(U"Lose");
 
 	manager.setFadeColor(ColorF{ 0.8, 0.9, 1.0 });
 

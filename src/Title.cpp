@@ -38,10 +38,10 @@ void Title::update()
 // Draw function
 void Title::draw() const 
 {
-	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
+	Scene::SetBackground(ColorF{ 0.3, 0.3, 0.3 });
 
 	// Add japanese text
-	FontAsset(U"TitleFont")(String(U"TEST")).drawAt(60, Vec2{ Scene::Size().x/2, Scene::Size().y/8 });
+	FontAsset(U"TitleFont")(String(U"HEISHI WA TSURAI YO")).drawAt(60, Vec2{ Scene::Size().x/2, Scene::Size().y/8 }, ColorF{ 0.9, 0.9, 0.1 });
 
 
 
