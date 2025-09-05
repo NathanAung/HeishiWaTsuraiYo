@@ -51,7 +51,7 @@ public:
 	bool isSpawning = true;
 	bool isMoving = true;
 
-	float trapMoveSpeed = 30.0f;
+	float trapMoveSpeed = 75.0f;
 
 	TrapManager();	// constructor
 	void Update(KingMoveManager& king, Player& player, std::vector<Enemy*>& enemyArr);	// update for the manager, spawn, update traps

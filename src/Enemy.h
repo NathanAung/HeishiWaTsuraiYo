@@ -9,6 +9,7 @@ public:
     void update() override;
     void draw() override;
 	void MoveTo(Vec2 pos);
+	bool fallen = false;
 
 private:
     const s3d::Texture knightAtkTexture{ U"Assets/knightAtk.png" };

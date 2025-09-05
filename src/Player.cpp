@@ -36,7 +36,7 @@ void Player::update() {
         facingLeft = (targetPos.x < position.x);
     }
 
-    if (KeySpace.down() && attackCoolDown >= 0.6) {
+    if (MouseL.down() && attackCoolDown >= 0.6) {
 		attackCoolDown = 0;
         atkAnimInterval = 0.06;
         isAttacking = true;

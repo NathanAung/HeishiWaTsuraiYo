@@ -52,15 +52,22 @@ void Game::update()
 	}
 
 	for(int i = 0; i < enemyArray.size(); i++){
-		
-		if (enemyArray[i]->collider.intersects(king->collider)){
-			king->OnKingDamaged();
-			enemyArray[i]->MoveTo(Vec2{Scene::Width() + 100,Random(100, Scene::Height() - 100)});
+		if(!enemyArray[i]->fallen){
+			if (enemyArray[i]->collider.intersects(king->collider)){
+				king->OnKingDamaged();
+				enemyArray[i]->MoveTo(Vec2{Scene::Width() + 100,Random(100, Scene::Height() - 100)});
+			}
+	
+			if(enemyArray[i]->collider.intersects(player->hitbox) && player->isAttacking){
+				enemyArray[i]->fallen = true;
+			}
 		}
 
-
-		if(enemyArray[i]->collider.x < -100)
+		if(enemyArray[i]->collider.x < -100){
 			enemyArray[i]->MoveTo(Vec2{Scene::Width() + 100,Random(100, Scene::Height() - 100)});
+			enemyArray[i]->fallen = false;
+		}
+			
 	}
 
 	

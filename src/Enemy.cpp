@@ -19,8 +19,8 @@ void Enemy::update() {
 
 
 void Enemy::draw() {
-    
-	texture.scaled(0.2).drawAt(position);
+    if(!fallen)
+		texture.scaled(0.2).drawAt(position);
 	
 }
 
