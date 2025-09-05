@@ -104,10 +104,10 @@ void Game::update()
 
 	king->Update();
 
-	if (king->ReturnGameStatus() & 0x0100)
+	if (king->ReturnGameStatus() & 0b0100)
 		changeScene(U"Win", 1.5s); //WON
 
-	if (king->ReturnGameStatus() & 0x0010)
+	if (king->ReturnGameStatus() & 0b0010)
 		changeScene(U"Lose", 1.5s); //LOST
 }
 

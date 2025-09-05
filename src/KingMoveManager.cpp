@@ -96,12 +96,12 @@ void KingMoveManager::Draw() {
 
 char KingMoveManager::ReturnGameStatus() {
 	if (_timeFramePerSec <= 0) {
-		return 0x0100;
+		return 0b0100;
 	}
 
 	if (_kingHP <= 0) {
-		return 0x0010;
+		return 0b0010;
 	}
 
-	return 0x0000;
+	return 0b0000;
 }
