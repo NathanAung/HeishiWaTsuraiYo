@@ -16,8 +16,5 @@ public:
 private:
     const s3d::Texture knightAtkTexture{ U"Assets/knightAtk.png" };
 
-	
-	double stepsX = 0;
-	double stepsY = 0;
 	Vec2 movingToPos;
 };

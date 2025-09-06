@@ -43,4 +43,6 @@ private:
 	TrapManager trapManager;
 
 	std::vector<Enemy*> enemyArray;
+
+	std::vector<Entity*> grassArray;
 };

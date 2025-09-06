@@ -9,11 +9,14 @@ Player::Player(const Vec2& pos, const Texture& tex)
 
 
 void Player::update() {
-
+	
 	if (MouseR.down()) {
         targetPos = Cursor::PosF();
 		targetPos.y -= 80;
-
+		double dx = targetPos.x - position.x;
+    	if (dx > 0.01 * speed || dx < -0.01 * speed) {
+        	facingLeft = (targetPos.x < position.x);
+    	}
     }
 
     const Vec2 delta = (targetPos - position);
@@ -23,7 +26,7 @@ void Player::update() {
     Circle{ Vec2(targetPos.x, targetPos.y + 80), 5 }.draw(ColorF{ 0.4, 0.4, 0.4 });
 
 	if(scrolling)
-		targetPos.x = Max(50.0, targetPos.x - 100 * Scene::DeltaTime());
+		targetPos.x = Max(50.0, targetPos.x - 75 * Scene::DeltaTime());
 		//targetPos.x -= 100 * Scene::DeltaTime();
 
     if (distance > 1.0) {
@@ -32,10 +35,7 @@ void Player::update() {
         position = targetPos;
     }
 
-    const double dx = targetPos.x - position.x;
-    if (dx > 0.01 * speed || dx < -0.01 * speed) {
-        facingLeft = (targetPos.x < position.x);
-    }
+
 
     if (MouseL.down() && attackCoolDown >= 0.6) {
 		attackCoolDown = 0;
@@ -82,7 +82,7 @@ void Player::update() {
 void Player::draw() {
     if (isAttacking) {
         knightAtkTexture.scaled(0.2).mirrored(facingLeft).drawAt(position);
-		hitbox.drawFrame(2, ColorF(1.0, 0.0, 0.0));
+		//hitbox.drawFrame(2, ColorF(1.0, 0.0, 0.0));
     } else {
         texture.scaled(0.2).mirrored(facingLeft).drawAt(position);
     }

@@ -18,7 +18,7 @@ void Enemy::update() {
 		position.x = Math::Lerp(position.x,movingToPos.x,Scene::DeltaTime());
 		position.y = Math::Lerp(position.y,movingToPos.y,Scene::DeltaTime());
 
-		movingToPos.x -= 75 * Scene::DeltaTime();
+		movingToPos.x -= 100 * Scene::DeltaTime();
 
 		if (Math::Abs(movingToPos.x - position.x) < 5)
 			movingTime = 0.0;
@@ -50,8 +50,18 @@ void Enemy::MoveTo(Vec2 pos){
 }
 
 void Enemy::PushTo(Vec2 pos, double time){
+	
+	double scaleX,scaleY,scaleFactor = 0;
+	if(position.distanceFrom(pos) > 200){
+		scaleFactor = 200/(position.distanceFrom(pos));
+		scaleX = position.x + (pos.x - position.x) * scaleFactor;
+		scaleY = position.y + (pos.y - position.y) * scaleFactor;
+
+		pos = Vec2{scaleX,scaleY};
+	}
+
 	movingToPos = pos;
-	stepsX = time / movingToPos.x;
-	stepsY = time / movingToPos.y;
 	movingTime = time;
+
+	
 }

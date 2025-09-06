@@ -15,4 +15,8 @@ public:
     virtual void draw();     // can be overridden by Player
 
     double getY() const;
+
+	void SetPos(Vec2 pos);
+
+	Vec2 GetPos() const;
 };

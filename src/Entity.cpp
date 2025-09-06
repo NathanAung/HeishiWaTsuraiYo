@@ -7,7 +7,7 @@ Entity::Entity(const Vec2& pos, const Texture& tex)
 Entity::~Entity() = default;
 
 void Entity::update() {
-	position.x -= 100 * Scene::DeltaTime();
+	position.x -= 75 * Scene::DeltaTime();
 	collider.setPos(position);
 }
 
@@ -18,4 +18,12 @@ void Entity::draw() {
 
 double Entity::getY() const {
     return position.y;
+}
+
+void Entity::SetPos(Vec2 pos) {
+	position = pos;
+}
+
+Vec2 Entity::GetPos() const {
+    return position;
 }
