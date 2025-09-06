@@ -6,7 +6,13 @@ Entity::Entity(const Vec2& pos, const Texture& tex)
 
 Entity::~Entity() = default;
 
-void Entity::update() {
+void Entity::update(bool scroll) {
+	if (scroll) {
+		updateScroll();
+	}
+}
+
+void Entity::updateScroll()  {
 	position.x -= 75 * Scene::DeltaTime();
 	collider.setPos(position);
 }

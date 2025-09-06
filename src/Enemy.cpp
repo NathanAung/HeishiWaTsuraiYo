@@ -7,7 +7,7 @@ Enemy::Enemy(const Vec2& pos, const Texture& tex)
 
 
 
-void Enemy::update() {
+void Enemy::update(bool scroll) {
 
 
 	if(movingTime > 0.0){
@@ -18,7 +18,7 @@ void Enemy::update() {
 		position.x = Math::Lerp(position.x,movingToPos.x,Scene::DeltaTime());
 		position.y = Math::Lerp(position.y,movingToPos.y,Scene::DeltaTime());
 
-		movingToPos.x -= 100 * Scene::DeltaTime();
+		movingToPos.x -= 25 * Scene::DeltaTime();
 
 		if (Math::Abs(movingToPos.x - position.x) < 5)
 			movingTime = 0.0;
@@ -35,6 +35,14 @@ void Enemy::update() {
 	// if (hitbox.intersects(otherHitbox) && isAttacking) {
     // 	// Collision detected
 	// }
+
+	if (scroll) {
+		updateScroll();
+	}
+}
+
+void Enemy::updateScroll() {
+	movingToPos.x -= 75 * Scene::DeltaTime();
 }
 
 

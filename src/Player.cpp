@@ -8,7 +8,7 @@ Player::Player(const Vec2& pos, const Texture& tex)
 
 
 
-void Player::update() {
+void Player::update(bool scroll) {
 	
 	if (MouseR.down()) {
         targetPos = Cursor::PosF();
@@ -25,9 +25,9 @@ void Player::update() {
 
     Circle{ Vec2(targetPos.x, targetPos.y + 80), 5 }.draw(ColorF{ 0.4, 0.4, 0.4 });
 
-	if(scrolling)
-		targetPos.x = Max(50.0, targetPos.x - 75 * Scene::DeltaTime());
-		//targetPos.x -= 100 * Scene::DeltaTime();
+	if(scroll) {
+		updateScroll();
+	}
 
     if (distance > 1.0) {
         position += direction * speed * Scene::DeltaTime();
@@ -70,6 +70,10 @@ void Player::update() {
 	// if (hitbox.intersects(otherHitbox) && isAttacking) {
     // 	// Collision detected
 	// }
+}
+
+void Player::updateScroll() {
+	targetPos.x = Max(50.0, targetPos.x - 75 * Scene::DeltaTime());
 }
 
 

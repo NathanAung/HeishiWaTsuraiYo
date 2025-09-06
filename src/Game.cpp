@@ -3,7 +3,6 @@
 
 Game::Game(const InitData& init)
 	: IScene{ init }
-	, m_emoji{ U"🐥"_emoji }
 {
 	Print << U"Game::Game()";
 	Window::Resize(1280, 720);
@@ -39,6 +38,8 @@ Game::Game(const InitData& init)
 
 
 	Vec2 kingPos = Vec2(150, 250); 		// King starting position
+
+	scrolling = true;
 
 }
 
@@ -109,6 +110,7 @@ void Game::update()
 	[](const auto& a, const auto& b) { return a->getY() < b->getY(); });
 
 	king->Update();
+	scrolling = !king->fallen;
 
 	if (king->ReturnGameStatus() & 0b0100)
 		changeScene(U"Win", 1.5s); //WON
@@ -130,7 +132,7 @@ void Game::draw() const
 
 
 
-	for (auto& e : entities) { e->update(); e->draw(); }
+	for (auto& e : entities) { e->update(scrolling); e->draw(); }
 
 
 	king->Draw();

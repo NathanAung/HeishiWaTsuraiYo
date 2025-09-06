@@ -6,5 +6,5 @@ public:
     King(const s3d::Vec2& pos, const s3d::Texture& tex);
 
     // override update
-    void update() override;
+    void update(bool scroll) override;
 };

@@ -7,8 +7,9 @@ public:
     Player(const s3d::Vec2& pos, const s3d::Texture& tex);
 	~Player() {};
 
-    void update() override;
+    void update(bool scroll) override;
     void draw() override;
+	void updateScroll() override;
 	
 	Rect hitbox;
 	bool isAttacking = false;

@@ -11,9 +11,9 @@ public:
     Entity(const s3d::Vec2& pos, const s3d::Texture& tex);
     virtual ~Entity();
 
-    virtual void update();   // can be overridden by Player
+    virtual void update(bool scroll);   // can be overridden by Player
     virtual void draw();     // can be overridden by Player
-
+	virtual void updateScroll();
     double getY() const;
 
 	void SetPos(Vec2 pos);

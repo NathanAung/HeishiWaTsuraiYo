@@ -6,7 +6,8 @@ public:
     Enemy(const s3d::Vec2& pos, const s3d::Texture& tex);
 	~Enemy() {};
 
-    void update() override;
+    void update(bool scroll) override;
+	void updateScroll() override;
     void draw() override;
 	void MoveTo(Vec2 pos);
 	void PushTo(Vec2 pos, double time);

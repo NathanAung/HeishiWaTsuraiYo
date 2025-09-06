@@ -23,6 +23,8 @@ public:
 
 	void drawFadeOut(double t) const override;
 
+	bool scrolling;
+
 private:
 
 	Texture m_emoji;
