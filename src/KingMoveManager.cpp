@@ -9,6 +9,7 @@ KingMoveManager::KingMoveManager(double kingXPosition, double scrollSpeed, doubl
 	_kingHP = _kingMaxHP;
 	_kingDamage = kingDamage;
 	_hpGaugebackImage = { kingXPosition - (_hpGaugebackImageWidth / 2), Scene::Height() / 2 - 100, _hpGaugebackImageWidth, _hpGaugebackImageHeight };
+	queenPos = Vec2((_timeFramePerSec * _scrollSpeedPerSec) + _kingXPosition + _kingPosOffset, Scene::Height() / 2);
 }
 
 void KingMoveManager::AddWinEvent(std::function<void()> func)
@@ -84,7 +85,8 @@ void KingMoveManager::Draw() {
 	if(!fallen)
 			king.scaled(0.25).drawAt(_kingXPosition, Scene::Height() / 2);
 	else false;
-	queen.scaled(0.25).drawAt((_timeFramePerSec * _scrollSpeedPerSec) + _kingXPosition + _kingPosOffset, Scene::Height() / 2);
+	//queen.scaled(0.25).drawAt((_timeFramePerSec * _scrollSpeedPerSec) + _kingXPosition + _kingPosOffset, Scene::Height() / 2);
+	queenPos = Vec2((_timeFramePerSec * _scrollSpeedPerSec) + _kingXPosition + _kingPosOffset, Scene::Height() / 2);
 	_gaugeBackImage.draw();
 	_hpGaugebackImage.draw();
 	RectF{ _gaugeBackImage.x + 10, _gaugeBackImage.y + 10, (_gaugeBackImage.w - 20) * (_timeFramePerSec / _kingMoveTimeSec), _gaugeBackImage.h - 20 }.draw(Palette::Blue);

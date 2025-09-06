@@ -40,6 +40,8 @@ private:
 
 	Player* player;
 	
+	Entity* queen;
+
 	TrapManager trapManager;
 
 	std::vector<Enemy*> enemyArray;

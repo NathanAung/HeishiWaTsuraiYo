@@ -86,4 +86,6 @@ class KingMoveManager
 		void Draw();
 
 		char ReturnGameStatus();
+
+		Vec2 queenPos;
 };

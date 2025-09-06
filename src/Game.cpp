@@ -16,6 +16,8 @@ Game::Game(const InitData& init)
 
 	player = new Player(Vec2{ 400,300 }, knightTexture);
 
+	queen = new Entity(king->queenPos, queenTexture);
+
 	for (int i = 0; i < 8; i++) {
 		enemyArray.push_back(new Enemy(Vec2{ Scene::Width() + i * 200,Random(100, Scene::Height() - 100) }, enemyTexture));
 	}
@@ -25,6 +27,7 @@ Game::Game(const InitData& init)
 	}
 
 	entities.push_back(std::unique_ptr<Player>(player));
+	entities.push_back(std::unique_ptr<Entity>(queen));
 	//entities.push_back(std::make_unique<King>(Vec2{200,350}, kingTexture));
 	// make random grass
 	for (int i = 0; i < grassArray.size(); i++) {
@@ -46,6 +49,7 @@ Game::~Game()
 
 void Game::update()
 {
+	queen->SetPos(king->queenPos);
 	if (not m_stopwatch.isStarted())
 	{
 		m_stopwatch.start();
