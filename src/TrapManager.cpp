@@ -10,13 +10,13 @@ TrapManager::TrapManager() {
 		Texture{ U"Assets/HoleEnemy.png" },
 		Texture{ U"Assets/hole.png"}
 	};
-	Console << U"Called";
+	//Console << U"Called";
 }
 
 
 void TrapManager::SpawnTrap() {
 	trapArr.emplace_back();
-	Console << U"trap spawned";
+	//Console << U"trap spawned";
 }
 
 
@@ -76,14 +76,14 @@ void TrapManager::UpdateTraps(const double& deltaTime, KingMoveManager& king, Pl
 
 			if (trap.currentPos.x < -50.0) {
 				trapArr.remove_at(i);
-				Console << U"trap removed";
+				//Console << U"trap removed";
 				continue;	// skip to next iteration
 			}
 		}
 		// pull out king if fallen
 		else if (trap.state == 1) {
 			if (trap.collider.intersects(player.collider) && MouseL.down()) {
-				Console << U"collide";
+				//Console << U"collide";
 				king.fallen = false;
 				TrapsPause(false);	// unpause trap
 				trap.state = 3;	// completely disable trap
