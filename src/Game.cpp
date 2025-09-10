@@ -4,7 +4,6 @@
 Game::Game(const InitData& init)
 	: IScene{ init }
 {
-	Print << U"Game::Game()";
 	Window::Resize(1280, 720);
 	// 背景の色を設定する | Set the background color
 	Scene::SetBackground(ColorF{ 0.7, 0.7, 0.7 });
@@ -45,7 +44,6 @@ Game::Game(const InitData& init)
 
 Game::~Game()
 {
-	Print << U"Game::~Game()";
 }
 
 void Game::update()
